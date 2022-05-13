@@ -1,0 +1,32 @@
+
+
+//Done list
+//TODO: Using M5Atom testing the firware. Test ok.
+//TODO: FASTLED for the on broad. Test ok.
+//TODO: MQTT upload message format. Test ok.
+//TODO: restart problem of the firmware. need to find the memory leakage point. Check that if BH1750 cannot init it will cause the esp32 restarting. ok
+
+
+//TODO list
+//TODO: create a button for disable the FASTLED onbroad.
+//TODO: MQTT SSL. SSL will add later.
+//TODO: Light auto adjustment function
+//TODO: HTTP server in the chip
+//TODO: BLE setting light
+//TODO: PIR sensor testing on the roof
+//TODO: check the project setting. some setting have error message while complie.
+//TODO: check the complier path. the complier have auto change path.
+//TODO: need to set the light to white light
+//TODO: need to lower the fade out timer
+//TODO: need to add function for control all led in the same group. Need to add a group id when creating mwifi.
+//TODO: check if the light is still controllable when network is not here
+//TODO: Add function for the button to switch on and off the LED. Only test with one sensor, the network will mulfunction when have two or more sensor connected.
+//TODO: Critrical: The button rtos task handler have problem when resume the task. ESP32 seem chasing back the 
+//task and cause unexpected behavior. Need to find way to pause task wihout chase back behavior. Autur suggest 
+//to use global variable to store the setting insteat of pause the task. Added a new control_flag but fail to 
+//sync it to rtos.
+//TODO: Check the sensor problem if having two or more sensor in the network, the network seem hung up
+//TODO: MQTT need to remote control function
+//TODO: Need to study how to send out error message. like led or other.
+//TOO: MQTT subtopic problem
+//TODO: Combinated sensor data to one 

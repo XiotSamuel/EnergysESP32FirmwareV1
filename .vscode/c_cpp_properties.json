@@ -1,0 +1,59 @@
+{
+    "configurations": [
+        {
+            "name": "Mac",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "/Users/samuelmok/.espressif/esp-mdf/components/**",
+                "/Users/samuelmok/.espressif/esp-mdf/esp-idf/components/**",
+                "/Users/samuelmok/.espressif/esp-mdf/components/mcommon/include/**"
+            ],
+            "defines": [],
+            "macFrameworkPath": [
+                "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks"
+            ],
+            "cStandard": "c17",
+            "cppStandard": "c++98",
+            "compilerPath": "/Users/samuelmok/.espressif/tools/xtensa-esp32-elf/esp-2020r3-8.4.0/xtensa-esp32-elf/bin/xtensa-esp32-elf-gcc",
+            "intelliSenseMode": "macos-clang-x64",
+            "browse": {
+                "path": [
+                    "${workspaceFolder}/",
+                    "${workspaceFolder}/include/",
+                    "${workspaceFolder}/components/",
+                    "/Users/samuelmok/.espressif/esp-mdf/components/",
+                    "/Users/samuelmok/.espressif/esp-mdf/esp-idf/components/",
+                    "/Users/samuelmok/.espressif/esp-mdf/components/mcommon/include/"
+                ]
+            }
+        },
+        {
+            "name": "Win32",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "${env:IDF_PATH}/components/**",
+                "${env:MDF_PATH}/components/**",
+                "${workspaceFolder}/build/config/**"
+            ],
+            "defines": [
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE"
+            ],
+            "windowsSdkVersion": "10.0.19041.0",
+            "compilerPath": "C:\\.espressif\\tools\\xtensa-esp32-elf\\esp-2020r3-8.4.0\\xtensa-esp32-elf\\bin\\xtensa-esp32-elf-gcc.exe",
+            "cStandard": "c17",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "${default}",
+            "browse": {
+                "path": [
+                    "${workspaceFolder}",
+                    "${env:IDF_PATH}/components",
+                    "${env:MDF_PATH}/components/",
+                    "${workspaceFolder}/build/config/"
+                ]
+            }
+        }
+    ],
+    "version": 4
+}

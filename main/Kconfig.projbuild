@@ -1,0 +1,262 @@
+menu "Firmware Configuration"
+
+    menu "WS2182 Config"
+        config RMT_TX_GPIO
+            int "RMT TX GPIO"
+            default 27
+            help
+                Set the GPIO number used for transmitting the RMT signal.
+        
+        config RMT_TX_CHANNEL
+            int "RMT TX CHANNEL"
+            default 0
+            help
+                Set the RMT TX Channel for LED control only 0 is require.
+
+        config STRIP_LED_NUMBER
+            int "Number of LEDS in a strip"
+            default 1
+            help
+                A single RGB strip contains several LEDs.
+    
+        config CHASE_SPEED_MS
+            int "Speed for changing LED colour"
+            default 1000
+            help
+                Speed for chaning LED colour
+    endmenu
+
+    menu "AS312 config"
+        config AS312_ENABLE
+                bool "Enable AS312"
+                default y
+                help
+                    enable AS312 sensor
+        config AS312_DATA
+            int "AS312 Data GPIO Num"
+            default 34 if IDF_TARGET_ESP32
+            help
+                AS312 data GPIO pin number
+
+    endmenu
+
+    menu "BH1750 config"
+        config BH1750_ENABLE
+            bool "Enable BH1750"
+            default y
+            help
+                enable BH1750 sensor
+        config I2C_MASTER_SCL
+            int "SCL GPIO Num"
+            default 6 if IDF_TARGET_ESP32C3
+            default 19 if IDF_TARGET_ESP32 || IDF_TARGET_ESP32S2 || IDF_TARGET_ESP32S3
+            help
+                GPIO number for I2C Master clock line.
+    
+        config I2C_MASTER_SDA
+            int "SDA GPIO Num"
+            default 5 if IDF_TARGET_ESP32C3
+            default 18 if IDF_TARGET_ESP32 || IDF_TARGET_ESP32S2 || IDF_TARGET_ESP32S3
+            help
+                GPIO number for I2C Master data line.
+            
+
+        choice BH1750_MEASURE_MODE
+            bool "Specify the light sensor operation mode"
+            default BH1750_CONTINUE_1LX_RES
+            help 
+                Specify the light sensor operation mode
+                BH1750_CONTINUE_1LX_RES = "Continuously H-Resolution mode"
+                BH1750_CONTINUE_HALFLX_RES = "Continuously H-Resolution mode2"
+                BH1750_CONTINUE_4LX_RES  = "Continuously L-Resolution mode"
+            config BH1750_CONTINUE_1LX_RES
+            bool "Continuously H-Resolution mode"
+            config BH1750_CONTINUE_HALFLX_RES
+            bool "Continuously H-Resolution mode2"
+            config BH1750_CONTINUE_4LX_RES 
+            bool "Continuously L-Resolution mode"
+            
+        endchoice
+              
+    endmenu
+
+    menu "MQTT config"
+
+        config MQTT_URL
+            string "MQTT broker URL"
+            default "mqtt://user2:Qazw123$@staging.energysmeter.com:1883"
+            help
+                URL of the broker to connect to
+
+        config MQTT_USERNAME
+            string "MQTT username"
+            default "user2"
+            help
+                password
+        
+        config MQTT_PASSWORD
+            string "MQTT password"
+            default "Qazw123$"
+            help
+                password
+        
+        config BROKER_CERTIFICATE_OVERRIDE
+            string "Broker certificate override"
+            default ""
+            help
+                Please leave empty if broker certificate included from a textfile; otherwise fill in a base64 part of PEM
+                format certificate
+    
+        config BROKER_CERTIFICATE_OVERRIDDEN
+            bool
+            default y if BROKER_CERTIFICATE_OVERRIDE != ""
+    
+        config BROKER_BIN_SIZE_TO_SEND
+            # This option is not visible and is used only to set parameters for example tests
+            # Here we configure the data size to send and to be expected in the python script
+            int
+            default 20000
+
+    endmenu
+
+    menu "light driver config"
+        config LIGHT_GPIO_RED
+            int "Light red pin GPIO number"
+            range 0 33
+            default 4 if IDF_TARGET_ESP32
+            default 4 if IDF_TARGET_ESP32C3
+            help
+                There are more enumerations like that
+                up to GPIO39, excluding GPIO20, GPIO24 and GPIO28..31.
+                They are not shown here to reduce redundant information.
+                @note GPIO34..39 are input mode only.
+        
+        config LIGHT_GPIO_GREEN
+            int "Light green pin GPIO number"
+            range 0 33
+            default 16 if IDF_TARGET_ESP32
+            default 5 if IDF_TARGET_ESP32C3
+            help
+                There are more enumerations like that
+                up to GPIO39, excluding GPIO20, GPIO24 and GPIO28..31.
+                They are not shown here to reduce redundant information.
+                @note GPIO34..39 are input mode only.
+        
+        config LIGHT_GPIO_BLUE
+            int "Light blue pin GPIO number"
+            range 0 33
+            default 5 if IDF_TARGET_ESP32
+            default 6 if IDF_TARGET_ESP32C3
+            help
+                There are more enumerations like that
+                up to GPIO39, excluding GPIO20, GPIO24 and GPIO28..31.
+                They are not shown here to reduce redundant information.
+                @note GPIO34..39 are input mode only.
+        
+        config LIGHT_GPIO_COLD
+            int "Light cold colors pin GPIO number"
+            range 0 33
+            default 19 if IDF_TARGET_ESP32
+            default 7 if IDF_TARGET_ESP32C3
+            help
+                There are more enumerations like that
+                up to GPIO39, excluding GPIO20, GPIO24 and GPIO28..31.
+                They are not shown here to reduce redundant information.
+                @note GPIO34..39 are input mode only.
+        
+        config LIGHT_GPIO_WARM
+            int "Light warm color pin GPIO number"
+            range 0 33
+            default 23 if IDF_TARGET_ESP32
+            default 10 if IDF_TARGET_ESP32C3
+            help
+                There are more enumerations like that
+                up to GPIO39, excluding GPIO20, GPIO24 and GPIO28..31.
+                They are not shown here to reduce redundant information.
+                @note GPIO34..39 are input mode only.
+        
+        config LIGHT_FADE_PERIOD_MS
+            int "The time from the current color to the next color"
+            default 500
+            help
+                The time from the current color to the next color.
+        
+        config LIGHT_BLINK_PERIOD_MS
+            int "Period of blinking lights"
+            default 2000
+            help
+                Period of blinking lights.
+
+        config LIGHT_AUTO_OFF
+            int "Period of light auto off"
+            default 3000
+            help
+                period of light auto off.
+    endmenu
+
+    choice LIGHT_EXAMPLE_MODE
+        bool "Select light example mode"
+        default LIGHT_EXAMPLE_MESH
+        help 
+            Specify which light example to build,support mesh-light or mesh-light with aliyun
+        config LIGHT_EXAMPLE_MESH
+        bool "mesh light"
+        config LIGHT_EXAMPLE_ALIYUN
+        bool "mesh light with aliyun"
+        
+    endchoice
+
+    config LIGHT_EXAMPLE_MODE
+        int
+        default 0 if LIGHT_EXAMPLE_MESH
+        default 1 if LIGHT_EXAMPLE_ALIYUN
+
+    menu "mesh light config"
+        depends on LIGHT_EXAMPLE_MESH
+        config LIGHT_VERSION
+            string "Light version"
+            default "1.2.2"
+            help
+                Version of the five-color light
+        
+        config LIGHT_MEMORY_DEBUG
+            bool "Enable memory debugging"
+            default n
+            help
+                Enable memory debugging.
+        
+        config LIGHT_BLE_GATEWAY
+            bool "Enable the BLE gateway on the non-root node"
+            default n
+            help
+                Enabling the BLE gateway on a non-root node,
+                enabling the BLE gateway will consume a lot of memory.
+    
+        config LIGHT_NETWORKING_TIME_OPTIMIZE_ENABLE
+            bool "Optimize networking time"
+            default n
+            help
+                1. Set the Bluetooth configuration network device to a fixed root node, eliminating the time of competing for the root node
+                2. Once the networking is complete, select again whether there is a better root node.
+                3. When power is turned on again, the device that was the root node last time is selected as the root node by default.
+        
+        config LIGHT_RESTART_COUNT_RESET
+            int "Reset the number of times the device has been powered off continuously to enter the configured network mode"
+            range 3 10
+            default 5
+            help
+                Reset the number of times the device has been powered off continuously to enter the configured network mode.
+        
+        config LIGHT_RESTART_COUNT_FALLBACK
+            int "Number of times the device restarted abnormally, entered, and exited from the previous version"
+            range 15 32
+            default 15
+            help
+                Number of times the device restarted abnormally, entered, and exited from the previous version.
+    
+    endmenu
+
+
+
+endmenu
+

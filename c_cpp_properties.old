@@ -1,0 +1,33 @@
+{
+    "configurations": [
+        {
+            "name": "MACOS",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "${workspaceFolder}/include/**",
+                "${workspaceFolder}/components/**",
+                "/Users/samuelmok/.espressif/esp-mdf/components/**",
+                "/Users/samuelmok/.espressif/esp-mdf/esp-idf/components/**"
+            ],
+            "defines": [
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE"
+            ],
+            "cStandard": "c17",
+            "cppStandard": "c++17",
+            "compilerPath": "/Users/samuelmok/.espressif/tools/xtensa-esp32-elf/esp-2020r3-8.4.0/xtensa-esp32-elf/bin/xtensa-esp32-elf-gcc",
+            "intelliSenseMode": "macos-gcc-x64",
+            "browse": {
+                "path": [
+                    "${workspaceFolder}/",
+                    "${workspaceFolder}/include/",
+                    "${workspaceFolder}/components/",
+                    "/Users/samuelmok/.espressif/esp-mdf/components/",
+                    "/Users/samuelmok/.espressif/esp-mdf/esp-idf/components/"
+                ]
+            }
+        }
+    ],
+    "version": 4
+}
